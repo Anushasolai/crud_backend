@@ -25,16 +25,16 @@ export const postUser = async (req: Request, res: Response) => {
     }
   }
 };
-//find the alluser
+
 export const getUsers = async (req: Request, res: Response) => {
   const users = await getAllUsers();
-  res.json(users);
+  res.json({data:users,message:'FindallUsers Successfully'});
 };
-//successfully find the user id
+
 export const getUser = async (req: Request, res: Response) => {
   const user = await getUserById(parseInt(req.params.id));
   if (user) {
-    res.json(user);
+    res.json({data:user,message:'Successfully find the user id'});
   } else {
     res.status(404).json({ message: "User not found" });
   }
@@ -52,7 +52,7 @@ export const putUser = async (req: Request, res: Response) => {
   try {
     const updatedUser = await updateUser(parseInt(req.params.id), name, password, email);
     if (updatedUser) {
-      res.json(updatedUser);
+      res.json({data:updatedUser,message:'updatedUser successsfully'});
     } else {
       res.status(404).json({ message: "User not found" });
     }
@@ -68,7 +68,7 @@ export const putUser = async (req: Request, res: Response) => {
 export const deleteUserById = async (req: Request, res: Response) => {
   const success = await deleteUser(parseInt(req.params.id));
   if (success) {
-    res.status(204).json();
+    res.status(204).json({message:'DeleteUser successsfully'});
   } else {
     res.status(404).json({ message: "User not found" });
   }
